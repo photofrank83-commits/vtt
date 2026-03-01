@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover">
   <title>Victoria Thompson Tuition · Harrogate & Pannal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=bold" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ----- global reset & variables ----- */
@@ -77,16 +77,22 @@
     }
     .reveal-scale.revealed { opacity: 1; transform: scale(1); }
 
-    /* feature card specific animation */
+    /* feature card specific animation (for highlight on scroll) */
     .feature-card {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s, border-color 0.3s;
     }
 
     .feature-card.revealed {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* highlight effect when card becomes visible */
+    .feature-card.highlight {
+      border-color: #ef4444;
+      box-shadow: 0 25px 45px -15px rgba(239,68,68,0.3);
     }
 
     /* ----- HEADER – ALWAYS SOLID WHITE ----- */
@@ -293,7 +299,7 @@
       transform: translateY(-3px);
     }
 
-    /* ----- hero ----- */
+    /* ----- HERO with updated stats (25+ students) and mobile stacking ----- */
     .hero {
       min-height: 100vh;
       position: relative;
@@ -350,9 +356,33 @@
     .btn-primary:hover { background: #dc2626; transform: translateY(-4px); box-shadow: 0 28px 38px -8px #ef4444b0; }
     .btn-outline-light { background: transparent; border: 2px solid white; color: white; padding: 12px 32px; }
     .btn-outline-light:hover { background: white; color: #0f172a; }
-    .hero-trust { margin-top: 60px; display: flex; gap: 30px; color: #e2e8f0; font-weight: 500; flex-wrap: wrap; }
+    
+    /* Hero trust stats - stacked on mobile */
+    .hero-trust {
+      margin-top: 60px;
+      display: flex;
+      gap: 30px;
+      color: #e2e8f0;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+    
+    .hero-trust span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 18px;
+      border-radius: 40px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .hero-trust i {
+      color: #fbbf24;
+    }
 
-    /* ----- ABOUT SECTION – refined spacing, professional typography ----- */
+    /* ----- ABOUT SECTION – refined spacing ----- */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -426,7 +456,7 @@
       transform: scale(1.02);
     }
 
-    /* features grid */
+    /* ----- WHY FAMILIES CHOOSE US (highlight on scroll) ----- */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -463,6 +493,15 @@
     }
 
     .feature-card:hover::before {
+      height: 100%;
+    }
+
+    .feature-card.highlight {
+      border-color: #ef4444;
+      box-shadow: 0 25px 45px -15px rgba(239,68,68,0.3);
+    }
+
+    .feature-card.highlight::before {
       height: 100%;
     }
 
@@ -586,41 +625,139 @@
       margin: 0 auto 20px;
     }
 
-    /* testimonials */
-    .testimonials { background: #f8fafc; padding: 100px 0; overflow: hidden; }
-    .testimonial-auto-slider { position: relative; width: 100%; margin: 40px 0; }
+    /* ===== RESTYLED TESTIMONIALS SECTION (What Parents Say) ===== */
+    .testimonials {
+      background: linear-gradient(135deg, #f8fafc, #ffffff);
+      padding: 100px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .testimonials::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ef4444, #fbbf24, #ef4444, transparent);
+    }
+
+    .testimonials h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .testimonials h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: #ef4444;
+      border-radius: 2px;
+    }
+
+    .testimonial-auto-slider {
+      position: relative;
+      width: 100%;
+      margin: 40px 0;
+      padding: 20px 0;
+    }
+
     .slide-track {
       display: flex;
-      width: calc(380px * 8);
-      animation: scroll 35s linear infinite;
+      width: calc(400px * 8);
+      animation: scroll 40s linear infinite;
     }
+
     .testimonial-card {
-      flex: 0 0 380px;
+      flex: 0 0 400px;
       background: white;
-      border-radius: 28px;
-      padding: 40px 35px;
-      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+      border-radius: 30px;
+      padding: 45px 40px;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
       margin-right: 25px;
+      border: 1px solid rgba(239,68,68,0.1);
+      transition: all 0.3s ease;
+      position: relative;
     }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 60px -15px rgba(239,68,68,0.25);
+      border-color: #ef4444;
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 20px;
+      left: 25px;
+      font-size: 5rem;
+      color: #ef4444;
+      opacity: 0.2;
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .testimonial-card p {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 25px;
+      color: #1e293b;
+      position: relative;
+      z-index: 1;
+      line-height: 1.7;
+    }
+
+    .testimonial-card .author {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0f172a;
+      margin-bottom: 5px;
+    }
+
+    .testimonial-card .child-info {
+      color: #64748b;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .testimonial-card .child-info i {
+      color: #ef4444;
+      font-size: 0.9rem;
+    }
+
     @keyframes scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-380px * 4 - 25px * 4)); }
+      100% { transform: translateX(calc(-400px * 4 - 25px * 4)); }
     }
-    .testimonial-auto-slider:hover .slide-track { animation-play-state: paused; }
 
-    /* ----- REFINED YELLOW CTA SECTION (Ready to support your child?) ----- */
+    .testimonial-auto-slider:hover .slide-track {
+      animation-play-state: paused;
+    }
+
+    /* ----- DARK CTA SECTION (Ready to support your child?) ----- */
     .cta-section {
       margin: 0 auto 100px;
       position: relative;
     }
 
     .cta-card {
-      background: linear-gradient(145deg, #fef9e7, #fef3c7);
+      background: linear-gradient(145deg, #0f172a, #1e293b);
       border-radius: 80px;
       padding: 80px 60px;
       text-align: center;
-      box-shadow: 0 40px 70px -25px rgba(239,68,68,0.3);
-      border: 1px solid rgba(239,68,68,0.15);
+      box-shadow: 0 40px 70px -25px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       position: relative;
       overflow: hidden;
@@ -633,7 +770,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(239,68,68,0.2) 0%, transparent 70%);
       animation: rotate 20s linear infinite;
     }
 
@@ -648,7 +785,7 @@
     }
 
     .cta-card h2 {
-      color: #0f172a;
+      color: white;
       font-size: clamp(36px, 6vw, 56px);
       font-weight: 800;
       line-height: 1.2;
@@ -658,7 +795,7 @@
     }
 
     .cta-card p {
-      color: #334155;
+      color: #cbd5e1;
       font-size: 1.3rem;
       max-width: 600px;
       margin: 0 auto 35px;
@@ -668,23 +805,24 @@
     }
 
     .cta-card .btn-primary {
-      background: #0f172a;
+      background: #ef4444;
       color: white;
       padding: 18px 48px;
       font-size: 1.2rem;
-      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 30px -10px rgba(239,68,68,0.3);
       position: relative;
       z-index: 1;
       border: 2px solid transparent;
     }
 
     .cta-card .btn-primary:hover {
-      background: #ef4444;
+      background: white;
+      color: #0f172a;
       transform: translateY(-4px);
       box-shadow: 0 30px 40px -10px #ef4444;
     }
 
-    /* contact section */
+    /* contact section (unchanged) */
     .contact {
       background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
       padding: 100px 0;
@@ -1164,6 +1302,31 @@
         padding: 60px 30px;
         border-radius: 50px;
       }
+
+      /* Hero stats stacked on mobile */
+      .hero-trust {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+      
+      .hero-trust span {
+        width: auto;
+        display: inline-flex;
+      }
+      
+      .testimonial-card {
+        flex: 0 0 320px;
+        padding: 35px 30px;
+      }
+      
+      .slide-track {
+        width: calc(320px * 8);
+      }
+      
+      @keyframes scroll {
+        100% { transform: translateX(calc(-320px * 4 - 25px * 4)); }
+      }
     }
 
     @media (max-width: 600px) {
@@ -1189,6 +1352,19 @@
 
       .cta-card p {
         font-size: 1.1rem;
+      }
+      
+      .testimonial-card {
+        flex: 0 0 280px;
+        padding: 30px 25px;
+      }
+      
+      .slide-track {
+        width: calc(280px * 8);
+      }
+      
+      @keyframes scroll {
+        100% { transform: translateX(calc(-280px * 4 - 25px * 4)); }
       }
     }
 
@@ -1238,6 +1414,7 @@
     </div>
   </div>
 
+  <!-- HERO with updated stats (25+ students) and mobile stacking -->
   <section class="hero">
     <div class="container hero-content">
       <h1>Building <span>Confidence</span><br>Unlocking Potential.</h1>
@@ -1248,13 +1425,13 @@
       </div>
       <div class="hero-trust">
         <span><i class="fas fa-star"></i> 10+ years experience</span>
-        <span><i class="fas fa-user-graduate"></i> 100+ students</span>
+        <span><i class="fas fa-user-graduate"></i> 25+ students</span>
         <span><i class="fas fa-map-marker-alt"></i> Harrogate / Pannal</span>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT VICTORIA – refined spacing & professional layout -->
+  <!-- ABOUT VICTORIA – refined spacing -->
   <section id="about" class="section about">
     <div class="container about-grid">
       <div class="about-content reveal-left">
@@ -1271,20 +1448,20 @@
     </div>
   </section>
 
-  <!-- Why Families Choose Victoria -->
+  <!-- WHY FAMILIES CHOOSE VICTORIA – with scroll highlight -->
   <section class="section features">
     <div class="container">
       <h2 class="reveal-fade">Why Families Choose Victoria</h2>
       <div class="features-grid">
-        <div class="feature-card reveal-scale" style="transition-delay: 0.1s;">
+        <div class="feature-card" id="feature1">
           <h3>Confidence First</h3>
           <p>Sessions designed to rebuild self‑belief and resilience. Every child learns to trust their abilities.</p>
         </div>
-        <div class="feature-card reveal-scale" style="transition-delay: 0.2s;">
+        <div class="feature-card" id="feature2">
           <h3>Personalised Plans</h3>
           <p>Every child receives a tailored roadmap with clear targets, adapted to their unique learning style.</p>
         </div>
-        <div class="feature-card reveal-scale" style="transition-delay: 0.3s;">
+        <div class="feature-card" id="feature3">
           <h3>Calm Environment</h3>
           <p>Structured, supportive learning setting – at home or online. No pressure, just progress.</p>
         </div>
@@ -1292,6 +1469,7 @@
     </div>
   </section>
 
+  <!-- TUITION SERVICES -->
   <section id="services" class="section services">
     <div class="container">
       <h2 class="reveal-fade">Tuition Services</h2>
@@ -1318,6 +1496,7 @@
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section class="section process">
     <div class="container">
       <h2 class="reveal-fade">How It Works</h2>
@@ -1330,25 +1509,59 @@
     </div>
   </section>
 
+  <!-- RESTYLED TESTIMONIALS SECTION (What Parents Say) -->
   <section id="testimonials" class="testimonials">
     <div class="container">
       <h2 class="reveal-fade">What Parents Say</h2>
       <div class="testimonial-auto-slider reveal-fade">
         <div class="slide-track">
-          <div class="testimonial-card"><p>“Victoria transformed our daughter’s confidence; she now enjoys learning.”</p><div class="author">– Sarah J.</div><div class="child-info">Age 10, Harrogate</div></div>
-          <div class="testimonial-card"><p>“Structured, patient and incredibly effective. My son’s grades improved.”</p><div class="author">– Mark L.</div><div class="child-info">Age 12, Pannal</div></div>
-          <div class="testimonial-card"><p>“A calm and supportive environment. Victoria really listens.”</p><div class="author">– Emma T.</div><div class="child-info">Age 9, Harrogate</div></div>
-          <div class="testimonial-card"><p>“Highly recommended! Our daughter is thriving.”</p><div class="author">– James K.</div><div class="child-info">Age 11, Harrogate</div></div>
-          <div class="testimonial-card"><p>“Victoria transformed our daughter’s confidence…”</p><div class="author">– Sarah J.</div></div>
-          <div class="testimonial-card"><p>“Structured, patient and incredibly effective.”</p><div class="author">– Mark L.</div></div>
-          <div class="testimonial-card"><p>“A calm and supportive environment.”</p><div class="author">– Emma T.</div></div>
-          <div class="testimonial-card"><p>“Highly recommended!”</p><div class="author">– James K.</div></div>
+          <div class="testimonial-card">
+            <p>“Victoria transformed our daughter's confidence; she now enjoys learning like never before.”</p>
+            <div class="author">– Sarah J.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 10, Harrogate</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“Structured, patient and incredibly effective. My son's grades improved within weeks.”</p>
+            <div class="author">– Mark L.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 12, Pannal</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“A calm and supportive environment. Victoria really listens to each child's needs.”</p>
+            <div class="author">– Emma T.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 9, Harrogate</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“Highly recommended! Our daughter is thriving academically and emotionally.”</p>
+            <div class="author">– James K.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 11, Harrogate</div>
+          </div>
+          <!-- Duplicates for seamless loop -->
+          <div class="testimonial-card">
+            <p>“Victoria transformed our daughter's confidence; she now enjoys learning.”</p>
+            <div class="author">– Sarah J.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 10, Harrogate</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“Structured, patient and incredibly effective. My son's grades improved.”</p>
+            <div class="author">– Mark L.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 12, Pannal</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“A calm and supportive environment. Victoria really listens.”</p>
+            <div class="author">– Emma T.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 9, Harrogate</div>
+          </div>
+          <div class="testimonial-card">
+            <p>“Highly recommended! Our daughter is thriving.”</p>
+            <div class="author">– James K.</div>
+            <div class="child-info"><i class="fas fa-child"></i> Age 11, Harrogate</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- REFINED YELLOW CTA SECTION (Ready to support your child?) -->
+  <!-- DARK CTA SECTION (Ready to support your child?) -->
   <div class="container cta-section">
     <div class="cta-card reveal-scale">
       <h2>Ready to support your child?</h2>
@@ -1357,6 +1570,7 @@
     </div>
   </div>
 
+  <!-- CONTACT SECTION -->
   <section id="contact" class="contact">
     <div class="container">
       <div class="contact-header reveal-fade">
@@ -1517,10 +1731,16 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
+          
+          // Add highlight class to feature cards when they become visible
+          if (entry.target.classList.contains('feature-card')) {
+            entry.target.classList.add('highlight');
+          }
+          
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+    }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
 
     revealElements.forEach(el => observer.observe(el));
 
