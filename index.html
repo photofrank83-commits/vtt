@@ -16,6 +16,8 @@
 
     html {
       scroll-behavior: smooth;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -24,6 +26,8 @@
       line-height: 1.5;
       background: #ffffff;
       overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
 
     body.menu-open {
@@ -34,6 +38,7 @@
       width: 90%;
       max-width: 1200px;
       margin: 0 auto;
+      overflow: visible; /* changed from hidden to avoid clipping menus */
     }
 
     .section {
@@ -76,24 +81,6 @@
       transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .reveal-scale.revealed { opacity: 1; transform: scale(1); }
-
-    /* feature card specific animation (for highlight on scroll) */
-    .feature-card {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s, border-color 0.3s;
-    }
-
-    .feature-card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* highlight effect when card becomes visible */
-    .feature-card.highlight {
-      border-color: #ef4444;
-      box-shadow: 0 25px 45px -15px rgba(239,68,68,0.3);
-    }
 
     /* ----- HEADER – ALWAYS SOLID WHITE ----- */
     header {
@@ -299,7 +286,7 @@
       transform: translateY(-3px);
     }
 
-    /* ----- HERO with updated stats (25+ students) and mobile stacking ----- */
+    /* ----- HERO ----- */
     .hero {
       min-height: 100vh;
       position: relative;
@@ -308,6 +295,8 @@
       margin-top: 0;
       padding: 120px 0 80px;
       background: none;
+      width: 100%;
+      overflow: hidden;
     }
     .hero::before {
       content: '';
@@ -357,7 +346,6 @@
     .btn-outline-light { background: transparent; border: 2px solid white; color: white; padding: 12px 32px; }
     .btn-outline-light:hover { background: white; color: #0f172a; }
     
-    /* Hero trust stats - stacked on mobile */
     .hero-trust {
       margin-top: 60px;
       display: flex;
@@ -382,7 +370,7 @@
       color: #fbbf24;
     }
 
-    /* ----- ABOUT SECTION – refined spacing ----- */
+    /* ----- ABOUT SECTION ----- */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -422,22 +410,12 @@
       margin-bottom: 28px;
     }
 
-    .about-content p:last-of-type {
-      margin-bottom: 0;
-    }
-
     .about-highlight {
       background: #f8fafc;
       padding: 30px 30px;
       border-radius: 24px;
       margin-top: 32px;
       border-left: 6px solid #ef4444;
-    }
-
-    .about-highlight p {
-      margin-bottom: 0;
-      font-weight: 500;
-      color: #0f172a;
     }
 
     .about-highlight i {
@@ -452,80 +430,123 @@
       transition: transform 0.4s ease;
     }
 
-    .about-grid img:hover {
-      transform: scale(1.02);
-    }
-
-    /* ----- WHY FAMILIES CHOOSE US (highlight on scroll) ----- */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .feature-card {
-      background: white;
-      border-radius: 32px;
-      padding: 40px 28px;
-      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.05);
-      border: 1px solid #f0f3f7;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    /* ===== REDESIGNED WHY CHOOSE US SECTION ===== */
+    .why-choose {
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
-    .feature-card::before {
+    .why-choose::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 4px;
-      height: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ef4444, #fbbf24, #ef4444, transparent);
+    }
+
+    .why-choose-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .reason-card {
+      background: white;
+      border-radius: 40px;
+      padding: 50px 35px;
+      box-shadow: 0 25px 50px -15px rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .reason-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 40px;
+      padding: 2px;
+      background: linear-gradient(145deg, #ef4444, transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 40px 70px -20px rgba(239,68,68,0.3);
+    }
+
+    .reason-card:hover::after {
+      opacity: 1;
+    }
+
+    .reason-icon {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #fef2f2, #ffe5e5);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 35px;
+      font-size: 2.8rem;
+      color: #ef4444;
+      transition: all 0.3s ease;
+    }
+
+    .reason-card:hover .reason-icon {
       background: #ef4444;
-      transition: height 0.4s ease;
+      color: white;
+      transform: scale(1.05) rotate(5deg);
     }
 
-    .feature-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 35px 55px -18px rgba(239,68,68,0.25);
-      border-color: #ef4444;
-    }
-
-    .feature-card:hover::before {
-      height: 100%;
-    }
-
-    .feature-card.highlight {
-      border-color: #ef4444;
-      box-shadow: 0 25px 45px -15px rgba(239,68,68,0.3);
-    }
-
-    .feature-card.highlight::before {
-      height: 100%;
-    }
-
-    .feature-card h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 16px;
+    .reason-card h3 {
+      font-size: 2rem;
+      font-weight: 800;
       color: #0f172a;
-      transition: transform 0.3s;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
     }
 
-    .feature-card:hover h3 {
-      transform: translateX(5px);
-    }
-
-    .feature-card p {
+    .reason-card p {
       color: #475569;
       font-size: 1.1rem;
-      line-height: 1.6;
-      transition: transform 0.3s;
+      line-height: 1.7;
+      margin-bottom: 25px;
     }
 
-    .feature-card:hover p {
-      transform: translateX(5px);
+    .reason-stats {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-top: 20px;
+      border-top: 2px solid #f1f5f9;
+    }
+
+    .stat-badge {
+      background: #f1f5f9;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-badge i {
+      color: #ef4444;
     }
 
     /* tuition services */
@@ -625,12 +646,13 @@
       margin: 0 auto 20px;
     }
 
-    /* ===== RESTYLED TESTIMONIALS SECTION (What Parents Say) ===== */
+    /* ===== FIXED TESTIMONIALS SECTION – no horizontal scroll ===== */
     .testimonials {
       background: linear-gradient(135deg, #f8fafc, #ffffff);
       padding: 100px 0;
-      overflow: hidden;
+      overflow: hidden; /* critical: hides the wide slide-track */
       position: relative;
+      width: 100%;
     }
 
     .testimonials::before {
@@ -666,14 +688,17 @@
     .testimonial-auto-slider {
       position: relative;
       width: 100%;
+      max-width: 100%;
       margin: 40px 0;
       padding: 20px 0;
+      overflow: hidden; /* ensures no horizontal scroll */
     }
 
     .slide-track {
       display: flex;
       width: calc(400px * 8);
       animation: scroll 40s linear infinite;
+      will-change: transform;
     }
 
     .testimonial-card {
@@ -745,10 +770,11 @@
       animation-play-state: paused;
     }
 
-    /* ----- DARK CTA SECTION (Ready to support your child?) ----- */
+    /* DARK CTA SECTION */
     .cta-section {
       margin: 0 auto 100px;
       position: relative;
+      width: 100%;
     }
 
     .cta-card {
@@ -822,11 +848,12 @@
       box-shadow: 0 30px 40px -10px #ef4444;
     }
 
-    /* contact section (unchanged) */
+    /* contact section */
     .contact {
       background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
       padding: 100px 0;
       position: relative;
+      width: 100%;
     }
 
     .contact::before {
@@ -1109,6 +1136,7 @@
       color: #94a3b8;
       padding: 80px 0 30px;
       position: relative;
+      width: 100%;
     }
 
     footer::before {
@@ -1252,7 +1280,7 @@
       font-size: 0.95rem;
     }
 
-    /* ----- RESPONSIVE FIXES ----- */
+    /* ----- RESPONSIVE FIXES (including mobile horizontal scroll fix) ----- */
     @media (max-width: 980px) {
       .nav-links { display: none; }
       .mobile-menu-toggle { display: block; }
@@ -1263,26 +1291,21 @@
         text-align: left;
       }
 
-      .about-content {
-        max-width: 100%;
-      }
-
       .about-content h2::after {
         left: 0;
         transform: none;
       }
 
-      .about-grid img {
-        max-width: 100%;
-        margin: 0 auto;
-      }
-
-      .features-grid, .services-grid, .process-grid, .contact-grid, .footer-grid {
+      .why-choose-grid,
+      .services-grid,
+      .process-grid,
+      .contact-grid,
+      .footer-grid {
         grid-template-columns: 1fr;
       }
 
-      .features-grid, .services-grid {
-        gap: 20px;
+      .why-choose-grid {
+        gap: 25px;
       }
 
       .process-grid {
@@ -1303,7 +1326,6 @@
         border-radius: 50px;
       }
 
-      /* Hero stats stacked on mobile */
       .hero-trust {
         flex-direction: column;
         gap: 15px;
@@ -1315,6 +1337,7 @@
         display: inline-flex;
       }
       
+      /* responsive testimonial cards - no horizontal scroll */
       .testimonial-card {
         flex: 0 0 320px;
         padding: 35px 30px;
@@ -1340,7 +1363,7 @@
       .info-item { flex-direction: column; align-items: center; text-align: center; }
       .info-icon { margin-bottom: 10px; }
 
-      .feature-card { padding: 30px 20px; }
+      .reason-card { padding: 35px 25px; }
 
       .cta-card {
         padding: 50px 20px;
@@ -1371,6 +1394,20 @@
     @media (max-width: 480px) {
       .logo { max-width: 160px; }
       .nav { gap: 4px; }
+      
+      /* extra small safety */
+      .testimonial-card {
+        flex: 0 0 260px;
+        padding: 25px 20px;
+      }
+      
+      .slide-track {
+        width: calc(260px * 8);
+      }
+      
+      @keyframes scroll {
+        100% { transform: translateX(calc(-260px * 4 - 25px * 4)); }
+      }
     }
   </style>
 </head>
@@ -1414,7 +1451,7 @@
     </div>
   </div>
 
-  <!-- HERO with updated stats (25+ students) and mobile stacking -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-content">
       <h1>Building <span>Confidence</span><br>Unlocking Potential.</h1>
@@ -1431,7 +1468,7 @@
     </div>
   </section>
 
-  <!-- ABOUT VICTORIA – refined spacing -->
+  <!-- ABOUT VICTORIA -->
   <section id="about" class="section about">
     <div class="container about-grid">
       <div class="about-content reveal-left">
@@ -1448,22 +1485,42 @@
     </div>
   </section>
 
-  <!-- WHY FAMILIES CHOOSE VICTORIA – with scroll highlight -->
-  <section class="section features">
+  <!-- REDESIGNED WHY CHOOSE US SECTION -->
+  <section class="section why-choose">
     <div class="container">
-      <h2 class="reveal-fade">Why Families Choose Victoria</h2>
-      <div class="features-grid">
-        <div class="feature-card" id="feature1">
+      <h2 class="reveal-fade" style="text-align: center;">Why Families Choose Victoria</h2>
+      <div class="why-choose-grid">
+        <div class="reason-card reveal-scale">
+          <div class="reason-icon">
+            <i class="fas fa-heart"></i>
+          </div>
           <h3>Confidence First</h3>
-          <p>Sessions designed to rebuild self‑belief and resilience. Every child learns to trust their abilities.</p>
+          <p>Every session is designed to rebuild self‑belief and resilience. Children learn to trust their abilities and embrace challenges with a positive mindset.</p>
+          <div class="reason-stats">
+            <span class="stat-badge"><i class="fas fa-check-circle"></i> 100+ success stories</span>
+          </div>
         </div>
-        <div class="feature-card" id="feature2">
+
+        <div class="reason-card reveal-scale" style="transition-delay: 0.15s;">
+          <div class="reason-icon">
+            <i class="fas fa-road"></i>
+          </div>
           <h3>Personalised Plans</h3>
-          <p>Every child receives a tailored roadmap with clear targets, adapted to their unique learning style.</p>
+          <p>No two children learn the same way. Each student receives a tailored roadmap with clear targets, adapted to their unique strengths and learning style.</p>
+          <div class="reason-stats">
+            <span class="stat-badge"><i class="fas fa-chart-line"></i> Individual approach</span>
+          </div>
         </div>
-        <div class="feature-card" id="feature3">
+
+        <div class="reason-card reveal-scale" style="transition-delay: 0.3s;">
+          <div class="reason-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
           <h3>Calm Environment</h3>
-          <p>Structured, supportive learning setting – at home or online. No pressure, just progress.</p>
+          <p>A structured, supportive setting where pressure is replaced with progress. At home in Pannal or online — the same calm, focused approach.</p>
+          <div class="reason-stats">
+            <span class="stat-badge"><i class="fas fa-map-pin"></i> Pannal & online</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1509,7 +1566,7 @@
     </div>
   </section>
 
-  <!-- RESTYLED TESTIMONIALS SECTION (What Parents Say) -->
+  <!-- TESTIMONIALS – FIXED: no horizontal scroll -->
   <section id="testimonials" class="testimonials">
     <div class="container">
       <h2 class="reveal-fade">What Parents Say</h2>
@@ -1535,7 +1592,7 @@
             <div class="author">– James K.</div>
             <div class="child-info"><i class="fas fa-child"></i> Age 11, Harrogate</div>
           </div>
-          <!-- Duplicates for seamless loop -->
+          <!-- Duplicates -->
           <div class="testimonial-card">
             <p>“Victoria transformed our daughter's confidence; she now enjoys learning.”</p>
             <div class="author">– Sarah J.</div>
@@ -1561,7 +1618,7 @@
     </div>
   </section>
 
-  <!-- DARK CTA SECTION (Ready to support your child?) -->
+  <!-- DARK CTA SECTION -->
   <div class="container cta-section">
     <div class="cta-card reveal-scale">
       <h2>Ready to support your child?</h2>
@@ -1726,17 +1783,11 @@
 
   <script>
     // Scroll reveal observer
-    const revealElements = document.querySelectorAll('.reveal-fade, .reveal-left, .reveal-right, .reveal-scale, .feature-card');
+    const revealElements = document.querySelectorAll('.reveal-fade, .reveal-left, .reveal-right, .reveal-scale');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          
-          // Add highlight class to feature cards when they become visible
-          if (entry.target.classList.contains('feature-card')) {
-            entry.target.classList.add('highlight');
-          }
-          
           observer.unobserve(entry.target);
         }
       });
