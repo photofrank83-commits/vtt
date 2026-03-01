@@ -145,7 +145,7 @@
       cursor: pointer;
     }
 
-    /* ----- hero (padding for fixed header) ----- */
+    /* ----- hero ----- */
     .hero {
       min-height: 100vh;
       position: relative;
@@ -204,12 +204,12 @@
     .btn-outline-light:hover { background: white; color: #0f172a; }
     .hero-trust { margin-top: 60px; display: flex; gap: 30px; color: #e2e8f0; font-weight: 500; flex-wrap: wrap; }
 
-    /* ----- about section (stats removed) ----- */
+    /* about section */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-grid p { font-size: 1.2rem; color: #334155; }
     .about-grid img { width: 100%; border-radius: 32px; box-shadow: 0 40px 70px -20px rgba(0,0,0,0.2); }
 
-    /* features & services (unchanged, still professional) */
+    /* features grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -225,6 +225,7 @@
     }
     .feature:hover { box-shadow: 0 35px 55px -18px rgba(0,0,0,0.15); border-color: #ef4444; }
 
+    /* tuition services */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -338,49 +339,203 @@
     }
     .testimonial-auto-slider:hover .slide-track { animation-play-state: paused; }
 
-    /* ===== REDESIGNED CONTACT SECTION – professional, elegant ===== */
+    /* ===== REDESIGNED CONTACT SECTION – premium, professional ===== */
     .contact {
-      background: #f8fafc;
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
       padding: 100px 0;
+      position: relative;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ef4444, #fbbf24, #ef4444, transparent);
+    }
+
+    .contact-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .contact-header h2 {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .contact-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: #ef4444;
+      border-radius: 2px;
+    }
+
+    .contact-header p {
+      color: #475569;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
 
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: stretch;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .contact-card {
+    /* contact form card */
+    .contact-form-card {
       background: white;
       border-radius: 40px;
-      padding: 50px 45px;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+      padding: 50px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.2);
+      border: 1px solid rgba(239,68,68,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.02);
-      height: 100%;
+    }
+
+    .contact-form-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 40px 70px -20px rgba(239,68,68,0.25);
+    }
+
+    .form-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-title i {
+      color: #ef4444;
+      font-size: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      background: #f8fafc;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ef4444;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(239,68,68,0.1);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-submit-btn {
+      background: #0f172a;
+      color: white;
+      border: none;
+      padding: 18px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .contact-submit-btn:hover {
+      background: #ef4444;
+      transform: translateY(-2px);
+      box-shadow: 0 20px 30px -10px rgba(239,68,68,0.4);
+    }
+
+    .contact-submit-btn i {
+      transition: transform 0.2s;
+    }
+
+    .contact-submit-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    /* contact info panel */
+    .contact-info-panel {
+      background: white;
+      border-radius: 40px;
+      padding: 50px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.2);
+      border: 1px solid rgba(239,68,68,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
     }
 
-    .contact-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 35px 60px -15px rgba(239,68,68,0.2);
+    .contact-info-panel:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 40px 70px -20px rgba(239,68,68,0.25);
     }
 
-    .contact-method {
+    .info-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 40px;
       display: flex;
       align-items: center;
+      gap: 12px;
+    }
+
+    .info-title i {
+      color: #ef4444;
+      font-size: 2rem;
+    }
+
+    .info-item {
+      display: flex;
       gap: 20px;
-      padding: 20px 0;
-      border-bottom: 1px solid #f0f3f7;
+      margin-bottom: 35px;
+      align-items: flex-start;
     }
 
-    .contact-method:last-of-type {
-      border-bottom: none;
-    }
-
-    .contact-icon {
+    .info-icon {
       width: 60px;
       height: 60px;
       background: #fef2f2;
@@ -388,72 +543,110 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #ef4444;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      flex-shrink: 0;
     }
 
-    .contact-card:hover .contact-icon {
+    .info-item:hover .info-icon {
       background: #ef4444;
       color: white;
+      transform: scale(1.05);
     }
 
-    .contact-detail {
+    .info-content {
       flex: 1;
     }
 
-    .contact-detail .label {
+    .info-label {
       font-size: 0.9rem;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
       color: #64748b;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
-    .contact-detail .value {
+    .info-value {
       font-size: 1.3rem;
       font-weight: 700;
+      color: #0f172a;
+    }
+
+    .info-value a {
       color: #0f172a;
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .contact-detail .value a {
-      text-decoration: none;
-      color: #0f172a;
-    }
-
-    .contact-detail .value a:hover {
+    .info-value a:hover {
       color: #ef4444;
     }
 
-    .contact-note {
+    .info-note {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #fef2f2, #fff5f5);
+      border-radius: 24px;
+      border-left: 6px solid #ef4444;
+    }
+
+    .info-note p {
+      color: #1e293b;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .info-note i {
+      color: #ef4444;
+      font-size: 1.8rem;
+    }
+
+    .business-hours {
       margin-top: 30px;
       background: #f8fafc;
-      padding: 20px 25px;
       border-radius: 24px;
+      padding: 25px;
+    }
+
+    .business-hours h4 {
+      font-size: 1.2rem;
+      color: #0f172a;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hours-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
       color: #475569;
-      font-size: 1rem;
-      border-left: 4px solid #ef4444;
+      font-weight: 500;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
     }
 
-    .contact-map {
-      height: 100%;
-      min-height: 450px;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.1);
+    .hours-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
-    .contact-map iframe {
-      width: 100%;
-      height: 100%;
-      display: block;
+    .hours-day {
+      font-weight: 600;
+      color: #0f172a;
     }
 
-    /* ===== REDESIGNED FOOTER – professional, refined ===== */
+    /* footer (unchanged from previous redesign) */
     footer {
       background: #0f172a;
       color: #94a3b8;
@@ -602,7 +795,7 @@
       font-size: 0.95rem;
     }
 
-    /* ----- mobile responsive adjustments ----- */
+    /* responsive */
     @media (max-width: 980px) {
       .nav-links { display: none; }
       .mobile-menu-toggle { display: block; }
@@ -612,17 +805,10 @@
       }
       .process-grid { grid-template-columns: 1fr 1fr; }
       .services-grid { max-width: 550px; margin-left: auto; margin-right: auto; }
-      .service-card { padding: 35px 25px; }
-
-      .testimonial-card { flex: 0 0 300px; }
-      .slide-track { width: calc(300px * 8); }
-      @keyframes scroll {
-        100% { transform: translateX(calc(-300px * 4 - 20px * 4)); }
-      }
-
+      
       .contact-grid { gap: 30px; }
-      .contact-map { min-height: 350px; }
-
+      .contact-form-card, .contact-info-panel { padding: 35px; }
+      
       .footer-grid { gap: 40px; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .footer-bottom-links { justify-content: center; }
@@ -633,9 +819,11 @@
       .hero p { font-size: 1.1rem; }
       .btn { padding: 12px 24px; font-size: 1rem; }
       .process-grid { grid-template-columns: 1fr; }
-      .contact-card { padding: 35px 25px; }
-      .contact-method { flex-direction: column; text-align: center; }
-      .contact-icon { margin-bottom: 10px; }
+      
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-card, .contact-info-panel { padding: 25px; }
+      .info-item { flex-direction: column; align-items: center; text-align: center; }
+      .info-icon { margin-bottom: 10px; }
     }
 
     @media (max-width: 480px) {
@@ -645,7 +833,6 @@
   </style>
 </head>
 <body>
-  <!-- HEADER – SOLID WHITE -->
   <header>
     <div class="container nav">
       <div class="logo">
@@ -662,7 +849,6 @@
     </div>
   </header>
 
-  <!-- HERO (stats cards removed) -->
   <section class="hero">
     <div class="container hero-content">
       <h1>Building <span>Confidence</span><br>Unlocking Potential.</h1>
@@ -679,7 +865,6 @@
     </div>
   </section>
 
-  <!-- ABOUT (directly follows hero, no stats) -->
   <section id="about" class="section about">
     <div class="container about-grid">
       <div class="reveal-left">
@@ -693,7 +878,6 @@
     </div>
   </section>
 
-  <!-- FEATURES (unchanged) -->
   <section class="section features">
     <div class="container">
       <h2 class="reveal-fade">Why Families Choose Victoria</h2>
@@ -705,7 +889,6 @@
     </div>
   </section>
 
-  <!-- TUITION SERVICES -->
   <section id="services" class="section services">
     <div class="container">
       <h2 class="reveal-fade">Tuition Services</h2>
@@ -732,7 +915,6 @@
     </div>
   </section>
 
-  <!-- PROCESS (unchanged) -->
   <section class="section process">
     <div class="container">
       <h2 class="reveal-fade">How It Works</h2>
@@ -745,7 +927,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS auto slider -->
   <section id="testimonials" class="testimonials">
     <div class="container">
       <h2 class="reveal-fade">What Parents Say</h2>
@@ -755,7 +936,6 @@
           <div class="testimonial-card"><p>“Structured, patient and incredibly effective. My son’s grades improved.”</p><div class="author">– Mark L.</div><div class="child-info">Age 12, Pannal</div></div>
           <div class="testimonial-card"><p>“A calm and supportive environment. Victoria really listens.”</p><div class="author">– Emma T.</div><div class="child-info">Age 9, Harrogate</div></div>
           <div class="testimonial-card"><p>“Highly recommended! Our daughter is thriving.”</p><div class="author">– James K.</div><div class="child-info">Age 11, Harrogate</div></div>
-          <!-- duplicates -->
           <div class="testimonial-card"><p>“Victoria transformed our daughter’s confidence…”</p><div class="author">– Sarah J.</div></div>
           <div class="testimonial-card"><p>“Structured, patient and incredibly effective.”</p><div class="author">– Mark L.</div></div>
           <div class="testimonial-card"><p>“A calm and supportive environment.”</p><div class="author">– Emma T.</div></div>
@@ -765,7 +945,6 @@
     </div>
   </section>
 
-  <!-- CTA panel -->
   <div class="container" style="margin: 0 auto 80px;">
     <div style="background: linear-gradient(140deg, #fde68a, #fcd34d); border-radius: 80px; padding: 70px 40px; text-align: center;" class="reveal-scale">
       <h2 style="color: #0f172a; font-size: 48px;">Ready to support your child?</h2>
@@ -773,56 +952,106 @@
     </div>
   </div>
 
-  <!-- ===== REDESIGNED CONTACT SECTION ===== -->
+  <!-- ===== REDESIGNED CONTACT SECTION – premium, professional ===== -->
   <section id="contact" class="contact">
     <div class="container">
-      <h2 class="reveal-fade" style="text-align: center;">Get in touch</h2>
+      <div class="contact-header reveal-fade">
+        <h2>Let's Connect</h2>
+        <p>Take the first step towards calmer, more confident learning. Reach out today.</p>
+      </div>
+
       <div class="contact-grid">
-        <!-- left side: contact information cards -->
-        <div class="contact-card reveal-left">
-          <div class="contact-method">
-            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-            <div class="contact-detail">
-              <div class="label">Call or WhatsApp</div>
-              <div class="value"><a href="tel:+441423123456">01423 123456</a></div>
+        <!-- left side: contact form -->
+        <div class="contact-form-card reveal-left">
+          <div class="form-title">
+            <i class="fas fa-paper-plane"></i>
+            <span>Send a message</span>
+          </div>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" placeholder="First name" required>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Last name" required>
+              </div>
             </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div class="contact-detail">
-              <div class="label">Email</div>
-              <div class="value"><a href="mailto:info@victoriatuition.co.uk">info@victoriatuition.co.uk</a></div>
+            <div class="form-group">
+              <input type="email" placeholder="Email address" required>
             </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="contact-detail">
-              <div class="label">Location</div>
-              <div class="value">Harrogate / Pannal</div>
+            <div class="form-group">
+              <input type="tel" placeholder="Phone number">
             </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-icon"><i class="fas fa-clock"></i></div>
-            <div class="contact-detail">
-              <div class="label">Response time</div>
-              <div class="value">Within 4 hours</div>
+            <div class="form-group">
+              <select>
+                <option value="" disabled selected>I'm interested in...</option>
+                <option>Primary tuition</option>
+                <option>Secondary tuition</option>
+                <option>SATs preparation</option>
+                <option>11+ preparation</option>
+                <option>Home schooling support</option>
+              </select>
             </div>
-          </div>
-          <div class="contact-note">
-            <i class="fas fa-star" style="color: #ef4444; margin-right: 8px;"></i>
-            Free 30‑minute initial consultation available for all new families.
-          </div>
+            <div class="form-group">
+              <textarea placeholder="Tell me about your child's needs..."></textarea>
+            </div>
+            <button type="submit" class="contact-submit-btn">
+              Send enquiry <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
         </div>
 
-        <!-- right side: map (elegant) -->
-        <div class="contact-map reveal-right">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37527.901442519484!2d-1.5701141606946039!3d53.99400945574245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48794e237175bd01%3A0x3c084fbaadea4ff!2sHarrogate!5e0!3m2!1sen!2suk" allowfullscreen="" loading="lazy" style="width:100%; height:100%;"></iframe>
+        <!-- right side: contact info panel -->
+        <div class="contact-info-panel reveal-right">
+          <div class="info-title">
+            <i class="fas fa-star"></i>
+            <span>Get in touch</span>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="info-content">
+              <div class="info-label">Call or text</div>
+              <div class="info-value"><a href="tel:+441423123456">01423 123456</a></div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div class="info-content">
+              <div class="info-label">Email</div>
+              <div class="info-value"><a href="mailto:info@victoriatuition.co.uk">info@victoriatuition.co.uk</a></div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-content">
+              <div class="info-label">Location</div>
+              <div class="info-value">Harrogate / Pannal</div>
+            </div>
+          </div>
+
+          <div class="info-note">
+            <p>
+              <i class="fas fa-coffee"></i>
+              <span>Free 30-minute consultation for all new families. Let's chat about how I can help.</span>
+            </p>
+          </div>
+
+          <div class="business-hours">
+            <h4><i class="far fa-clock"></i> When to reach me</h4>
+            <div class="hours-grid">
+              <div class="hours-row"><span class="hours-day">Monday - Friday</span> <span>9am – 7pm</span></div>
+              <div class="hours-row"><span class="hours-day">Saturday</span> <span>9am – 2pm</span></div>
+              <div class="hours-row"><span class="hours-day">Sunday</span> <span>Closed</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== REDESIGNED FOOTER ===== -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -885,7 +1114,6 @@
   </footer>
 
   <script>
-    // Scroll reveal observer
     const revealElements = document.querySelectorAll('.reveal-fade, .reveal-left, .reveal-right, .reveal-scale');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -898,7 +1126,6 @@
 
     revealElements.forEach(el => observer.observe(el));
 
-    // mobile menu placeholder
     document.querySelector('.mobile-menu-toggle')?.addEventListener('click', ()=>{
       alert('Mobile menu would open — add your own panel if needed.');
     });
